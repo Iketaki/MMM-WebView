@@ -16,9 +16,7 @@ cd ~/MagicMirror/modules # adapt directory if you are using a different one
 git clone https://github.com/Iketaki/MMM-WebView.git
 ```
 
-2. Add the module to your config/config.js file.
-
-add the following configuration block to the modules array in the `config/config.js` file:
+2. Add the following configuration block to the modules array in the `config/config.js` file:
 
 ```js
 let config = {
@@ -54,4 +52,4 @@ let config = {
 | --------- | --------------------------------------------------------------------------------------------- |
 | `width`   | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`   |
 | `height`  | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px` |
-| `url`<br> | [Optional] the URL in the WebView<br>Default: `https://google.com/`                           |
+| `url`<br> | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                       |
