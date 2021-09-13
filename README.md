@@ -34,7 +34,7 @@ let config = {
 };
 ```
 
-3. Also, add the following configuration block to `config/config.js` file. This is required to run this module correctly.
+3. Finally, add the following configuration block to `config/config.js` file. This is required to run this module correctly.
 
 ```js
 let config = {
@@ -53,3 +53,11 @@ let config = {
 | `width`   | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`   |
 | `height`  | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px` |
 | `url`<br> | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                       |
+
+## Motivation
+
+When considering about embedding websites to MagicMirror, some websites cannot be embedded using iframe.
+
+There are several reasons, one of that is HTTP response header `X-Frame-Options: DENY` by the websites makes iframe disable. This is needed for the internet security.
+
+For MagicMirror usage, using WebView instead of iframe may resolve the problem.
