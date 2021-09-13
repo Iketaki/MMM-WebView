@@ -1,0 +1,23 @@
+{
+	"name": "MMM-WebView",
+	"version": "1.0.0",
+	"description": "The simple WebView module for MagicMirror²",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Iketaki/MMM-WebView"
+	},
+	"keywords": [
+		"magic mirror",
+		"magicmirror",
+		"magicmirror2",
+		"smart mirror",
+		"webview"
+	],
+	"author": "Shunta Iketaki",
+	"license": "MIT",
+	"homepage": "https://github.com/Iketaki/MMM-WebView",
+	"dependencies": {},
+	"devDependencies": {
+		"prettier": "2.4.0"
+	}
+}
