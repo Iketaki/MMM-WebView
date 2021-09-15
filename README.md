@@ -9,7 +9,7 @@ It makes possible to display pages that cannot be displayed in a `<iframe>`.
 
 ## Installation
 
-1. Clone this repository in your `modules` folder, and install dependencies:
+1. Clone this repository in your `modules` folder:
 
 ```bash
 cd ~/MagicMirror/modules # adapt directory if you are using a different one
