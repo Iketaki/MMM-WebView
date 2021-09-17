@@ -48,11 +48,12 @@ let config = {
 
 ## Configuration options
 
-| Option    | Description                                                                                   |
-| --------- | --------------------------------------------------------------------------------------------- |
-| `width`   | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`   |
-| `height`  | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px` |
-| `url`<br> | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                       |
+| Option     | Description                                                                                   |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| `url`<br>  | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                       |
+| `width`    | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`   |
+| `height`   | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px` |
+| `loadedJS` | [Optional] the JavaScript code string to be executed after page load<br>Default: `undefined`  |
 
 ## Motivation
 
