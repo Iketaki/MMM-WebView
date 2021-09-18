@@ -12,7 +12,7 @@ It makes possible to display pages that cannot be displayed in a `<iframe>`.
 1. Clone this repository in your `modules` folder:
 
 ```bash
-cd ~/MagicMirror/modules # adapt directory if you are using a different one
+cd ~/MagicMirror/modules
 git clone https://github.com/Iketaki/MMM-WebView.git
 ```
 
@@ -44,6 +44,15 @@ let config = {
     },
   },
 };
+```
+
+## Update
+
+1. Get the latest version using the command `git pull`:
+
+```bash
+cd ~/MagicMirror/modules/MMM-WebView
+git pull
 ```
 
 ## Configuration options
