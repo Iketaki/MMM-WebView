@@ -57,12 +57,14 @@ git pull
 
 ## Configuration options
 
-| Option     | Description                                                                                   |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| `url`<br>  | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                       |
-| `width`    | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`   |
-| `height`   | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px` |
-| `loadedJS` | [Optional] the JavaScript code string to be executed after page load<br>Default: `undefined`  |
+| Option                | Description                                                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `url`<br>             | [Optional] the URL in the WebView<br>Default: `https://www.google.com/`                                                    |
+| `width`               | [Optional] the Width of the WebView (the value of CSS property `width`)<br>Default: `640px`                                |
+| `height`              | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px`                              |
+| `autoRefresh`         | [Optional] Set to true to allow an auto-refresh of the WebView<br>Default: `false`                                         |
+| `autoRefreshInterval` | [Optional] the interval of auto-refresh for the WebView, in milliseconds If autoRefresh: true<br>Default: `10 * 60 * 1000` |
+| `loadedJS`            | [Optional] the JavaScript code string to be executed after page load<br>Default: `undefined`                               |
 
 ## Motivation
 
