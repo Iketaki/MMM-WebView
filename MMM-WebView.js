@@ -10,7 +10,16 @@ Module.register('MMM-WebView', {
     url: 'https://www.google.com/',
     height: '640px',
     width: '480px',
+    autoRefresh: false,
+    autoRefreshInterval: 10 * 60 * 1000,
     loadedJS: undefined,
+  },
+  start: function () {
+    if (this.config.autoRefresh) {
+      setInterval(() => {
+        this.updateDom();
+      }, this.config.autoRefreshInterval);
+    }
   },
   getDom: function () {
     let wrapper = document.createElement('div');
