@@ -5,6 +5,8 @@
  * MIT Licensed.
  */
 
+const WEBVIEW_ID = 'mmm-webview';
+
 Module.register('MMM-WebView', {
   defaults: {
     url: 'https://www.google.com/',
@@ -17,20 +19,23 @@ Module.register('MMM-WebView', {
   start: function () {
     if (this.config.autoRefresh) {
       setInterval(() => {
-        this.updateDom();
+        //Electron.session.defaultSession.clearCache(() => {});
+        //this.updateDom();
+        const webview = document.getElementById(WEBVIEW_ID);
+        webview.reloadIgnoringCache();
       }, this.config.autoRefreshInterval);
     }
   },
   getDom: function () {
     let wrapper = document.createElement('div');
     wrapper.id = 'mmm-webview-wrapper';
-    wrapper.innerHTML = `<webview id="mmm-webview" style="width: ${this.config.width}; height: ${this.config.height};" src="${this.config.url}"></webview>`;
+    wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height};" src="${this.config.url}"></webview>`;
     return wrapper;
   },
   notificationReceived: function (notification, payload, sender) {
     if (notification == 'MODULE_DOM_CREATED') {
       if (this.config.loadedJS && this.config.loadedJS.length > 0) {
-        const webview = document.getElementById('mmm-webview');
+        const webview = document.getElementById(WEBVIEW_ID);
         if (webview) {
           webview.addEventListener('did-finish-load', () => {
             webview.executeJavaScript(this.config.loadedJS);
