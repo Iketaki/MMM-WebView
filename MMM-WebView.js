@@ -15,6 +15,7 @@ Module.register('MMM-WebView', {
     autoRefresh: false,
     autoRefreshInterval: 10 * 60 * 1000,
     loadedJS: undefined,
+    zoomfactor: undefined,
   },
   start: function () {
     if (this.config.autoRefresh) {
@@ -33,17 +34,23 @@ Module.register('MMM-WebView', {
     return wrapper;
   },
   notificationReceived: function (notification, payload, sender) {
-    if (notification == 'MODULE_DOM_CREATED') {
-      if (this.config.loadedJS && this.config.loadedJS.length > 0) {
-        const webview = document.getElementById(WEBVIEW_ID);
-        if (webview) {
-          webview.addEventListener('did-finish-load', () => {
-            webview.executeJavaScript(this.config.loadedJS);
-          });
-        } else {
-          // TODO: Show Error
-        }
-      }
+    if (notification != 'MODULE_DOM_CREATED') {
+      return;
     }
+
+    const webview = document.getElementById(WEBVIEW_ID);
+    if (!webview) {
+      return;
+    }
+
+    webview.addEventListener('did-finish-load', () => {
+      if (this.config.loadedJS && this.config.loadedJS.length > 0) {
+        webview.executeJavaScript(this.config.loadedJS);
+      }
+
+      if (this.config.zoomfactor) {
+        webview.setZoomFactor(this.config.zoomfactor);
+      }
+    });
   },
 });
