@@ -17,6 +17,7 @@ Module.register('MMM-WebView', {
     refreshMinute: 5, // Set the minute at which to refresh
     useRefreshMinute: true, // Set to false to use autoRefreshInterval instead of refreshMinute
     invertColors: false, // new config option for inverting colors
+    filterPercent: 100, // new config option for filter percentage
     loadedJS: undefined,
   },
 
