@@ -13,26 +13,40 @@ Module.register('MMM-WebView', {
     height: '640px',
     width: '480px',
     autoRefresh: false,
-    autoRefreshInterval: 10 * 60 * 1000,
+    autoRefreshInterval: 10 * 60 * 1000, // Refresh interval in milliseconds (10 minutes)
+    refreshMinute: 5, // Set the minute at which to refresh
+    useRefreshMinute: true, // Set to false to use autoRefreshInterval instead of refreshMinute
     loadedJS: undefined,
   },
-  start: function () {
+
+  start: function() {
     if (this.config.autoRefresh) {
-      setInterval(() => {
-        //Electron.session.defaultSession.clearCache(() => {});
-        //this.updateDom();
-        const webview = document.getElementById(WEBVIEW_ID);
-        webview.reloadIgnoringCache();
-      }, this.config.autoRefreshInterval);
+      if (this.config.useRefreshMinute) {
+        const refreshInterval = 60 * 60 * 1000; // Refresh interval in milliseconds (1 hour)
+        setInterval(() => {
+          const now = new Date();
+          if (now.getMinutes() === this.config.refreshMinute) {
+            const webview = document.getElementById(WEBVIEW_ID);
+            webview.reloadIgnoringCache();
+          }
+        }, refreshInterval);
+      } else {
+        setInterval(() => {
+          const webview = document.getElementById(WEBVIEW_ID);
+          webview.reloadIgnoringCache();
+        }, this.config.autoRefreshInterval);
+      }
     }
   },
-  getDom: function () {
+
+  getDom: function() {
     let wrapper = document.createElement('div');
     wrapper.id = 'mmm-webview-wrapper';
     wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height};" src="${this.config.url}"></webview>`;
     return wrapper;
   },
-  notificationReceived: function (notification, payload, sender) {
+
+  notificationReceived: function(notification, payload, sender) {
     if (notification == 'MODULE_DOM_CREATED') {
       if (this.config.loadedJS && this.config.loadedJS.length > 0) {
         const webview = document.getElementById(WEBVIEW_ID);
