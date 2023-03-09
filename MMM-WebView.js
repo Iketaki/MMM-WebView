@@ -19,7 +19,7 @@ Module.register('MMM-WebView', {
     invertColors: false,
     filterPercent: 100, // new config option for filter percentage
     loadedJS: undefined,
-    showScrollbar: true,
+    showScrollbar: false,
   },
 
   start: function() {
@@ -45,7 +45,7 @@ Module.register('MMM-WebView', {
   getDom: function () {
     let wrapper = document.createElement('div');
     wrapper.id = 'mmm-webview-wrapper';
-	wrapper.classList.add('mmm-webview'); 
+    wrapper.classList.add('mmm-webview');
     wrapper.style.overflow = this.config.showScrollbar ? 'scroll' : 'hidden';
     let filter = this.config.invertColors ? `invert(${this.config.filterPercent}%)` : 'none';
     wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height}; filter: ${filter};" src="${this.config.url}"></webview>`;
@@ -65,6 +65,9 @@ Module.register('MMM-WebView', {
         }
       }
     }
+    if (notification === 'MMM_WEBVIEW_TOGGLE_SCROLLBAR') {
+      this.toggleScrollbar();
+    }
   },
 
   getStyles: function () {
@@ -82,12 +85,6 @@ Module.register('MMM-WebView', {
       wrapper.style.overflow = 'scroll';
     } else {
       wrapper.style.overflow = 'hidden';
-    }
-  },
-
-  notificationReceived: function(notification, payload, sender) {
-    if (notification === 'MMM_WEBVIEW_TOGGLE_SCROLLBAR') {
-      this.toggleScrollbar();
     }
   },
 
