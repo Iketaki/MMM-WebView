@@ -1,0 +1,3 @@
+.mmm-webview-wrapper::-webkit-scrollbar {
+  display: none;
+}
