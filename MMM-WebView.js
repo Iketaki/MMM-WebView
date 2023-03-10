@@ -14,19 +14,20 @@ Module.register('MMM-WebView', {
     width: '480px',
     autoRefresh: false,
     autoRefreshInterval: 10 * 60 * 1000, // Refresh interval in milliseconds (10 minutes)
+	useRefreshMinute: false, // Set to false to use autoRefreshInterval instead of refreshMinute
     refreshMinute: 05, // Refresh every hour on the set minute. 00-59 
-    useRefreshMinute: true, // Set to false to use autoRefreshInterval instead of refreshMinute
     invert: false, // Set to true to activate invert
     invertColors: false, // works only if 'invert' is set to true, Set to true to invert colors, false to invert only white
     filterPercent: 100, // config option for filter percentage
+	showScrollbar: false,
     loadedJS: undefined,
-    showScrollbar: false,
+
   },
 
 start: function() {
   if (this.config.autoRefresh) {
     if (this.config.useRefreshMinute) {
-      const refreshInterval = 60 * 1000; // Refresh interval in milliseconds (1 minute)
+      const refreshInterval = 60 * 1000; 
       setInterval(() => {
         const now = new Date();
         if (now.getMinutes() === this.config.refreshMinute) {
@@ -42,8 +43,6 @@ start: function() {
     }
   }
 
-//  const myWebView = document.getElementById(WEBVIEW_ID);
-//  myWebView.insertCSS('html,body{ overflow: hidden !important; }');
 },
 
 
@@ -52,7 +51,6 @@ getDom: function () {
   let wrapper = document.createElement('div');
   wrapper.id = 'mmm-webview-wrapper';
   wrapper.classList.add('mmm-webview');
-  let scrollbar = this.config.showScrollbar ? 'auto' : 'hidden';
   let filter;
   if (this.config.invert) {
     filter = this.config.invertColors ? `invert(${this.config.filterPercent}%)` : `saturate(0) brightness(100%) invert(100%)`;
@@ -60,24 +58,32 @@ getDom: function () {
     filter = 'none';
   }
   wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height}; filter: ${filter}; overflow: hidden;" src="${this.config.url}"></webview>`;
-  wrapper.style.overflow = scrollbar;
-      // Add the CSS styling to the webview
-    let webview = wrapper.querySelector('webview');
-    webview.addEventListener('did-finish-load', () => {
-      webview.insertCSS('html, body { overflow: hidden !important; }');
-    });
+  
+  let webview = wrapper.querySelector('webview');
+  webview.addEventListener('did-finish-load', () => {
+    webview.insertCSS('html, body { overflow: hidden !important; }');
+  });
   return wrapper;
 },
 
 toggleScrollbar: function() {
   this.config.showScrollbar = !this.config.showScrollbar;
   const wrapper = document.getElementById('mmm-webview-wrapper');
+  const webview = document.getElementById(WEBVIEW_ID);
   if (this.config.showScrollbar) {
-    wrapper.style.overflow = 'auto';
+    wrapper.style.overflow = 'scroll';
+    webview.removeEventListener('did-finish-load', this.didFinishLoad);
+    webview.insertCSS('html, body { overflow: auto !important; }');
   } else {
     wrapper.style.overflow = 'hidden';
+    this.didFinishLoad = () => {
+      webview.insertCSS('html, body { overflow: hidden !important; }');
+    }
+    webview.addEventListener('did-finish-load', this.didFinishLoad);
   }
+  wrapper.style.overflow = this.config.showScrollbar ? 'auto' : 'hidden';
 },
+
 
 
   notificationReceived: function(notification, payload, sender) {
