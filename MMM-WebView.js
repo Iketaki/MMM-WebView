@@ -12,7 +12,7 @@ Module.register('MMM-WebView', {
     url: 'https://www.google.com/',
     height: '640px',
     width: '480px',
-    autoRefresh: false,
+    autoRefresh: true,
     autoRefreshInterval: 10 * 60 * 1000, // Refresh interval in milliseconds (10 minutes)
     refreshMinute: 5, // Set the minute at which to refresh
     useRefreshMinute: true, // Set to false to use autoRefreshInterval instead of refreshMinute
@@ -25,7 +25,7 @@ Module.register('MMM-WebView', {
   start: function() {
     if (this.config.autoRefresh) {
       if (this.config.useRefreshMinute) {
-        const refreshInterval = 60 * 60 * 1000; // Refresh interval in milliseconds (1 hour)
+        const refreshInterval = 60 * 1000; // Refresh interval in milliseconds (1 minute)
         setInterval(() => {
           const now = new Date();
           if (now.getMinutes() === this.config.refreshMinute) {
@@ -42,15 +42,22 @@ Module.register('MMM-WebView', {
     }
   },
 
-  getDom: function () {
-    let wrapper = document.createElement('div');
-    wrapper.id = 'mmm-webview-wrapper';
-    wrapper.classList.add('mmm-webview');
-    wrapper.style.overflow = this.config.showScrollbar ? 'scroll' : 'hidden';
-    let filter = this.config.invertColors ? `invert(${this.config.filterPercent}%)` : 'none';
-    wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height}; filter: ${filter};" src="${this.config.url}"></webview>`;
-    return wrapper;
-  },
+
+
+
+getDom: function () {
+  let wrapper = document.createElement('div');
+  wrapper.id = 'mmm-webview-wrapper';
+  wrapper.classList.add('mmm-webview');
+  let scrollbar = this.config.showScrollbar ? 'auto' : 'hidden';
+  let filter = this.config.invertColors ? `invert(${this.config.filterPercent}%)` : 'none';
+  wrapper.innerHTML = `<webview id="${WEBVIEW_ID}" style="width: ${this.config.width}; height: ${this.config.height}; filter: ${filter}; overflow: ${scrollbar}; -webkit-scrollbar: { display: none; }" src="${this.config.url}"></webview>`;
+  return wrapper;
+},
+
+
+  
+  
 
   notificationReceived: function(notification, payload, sender) {
     if (notification == 'MODULE_DOM_CREATED') {
