@@ -14,12 +14,12 @@ Module.register('MMM-WebView', {
     width: '480px',
     autoRefresh: false,
     autoRefreshInterval: 10 * 60 * 1000, // Refresh interval in milliseconds (10 minutes)
-	useRefreshMinute: false, // Set to false to use autoRefreshInterval instead of refreshMinute
+    useRefreshMinute: false, // Set to false to use autoRefreshInterval instead of refreshMinute
     refreshMinute: 05, // Refresh every hour on the set minute. 00-59 
     invert: false, // Set to true to activate invert
     invertColors: false, // works only if 'invert' is set to true, Set to true to invert colors, false to invert only white
     filterPercent: 100, // config option for filter percentage
-	showScrollbar: false,
+    showScrollbar: false,
     loadedJS: undefined,
 
   },
