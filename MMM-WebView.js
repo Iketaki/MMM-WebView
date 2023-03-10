@@ -12,7 +12,7 @@ Module.register('MMM-WebView', {
     url: 'https://www.google.com/',
     height: '640px',
     width: '480px',
-    autoRefresh: true,
+    autoRefresh: false,
     autoRefreshInterval: 10 * 60 * 1000, // Refresh interval in milliseconds (10 minutes)
     refreshMinute: 05, // Refresh every hour on the set minute. 00-59 
     useRefreshMinute: true, // Set to false to use autoRefreshInterval instead of refreshMinute
