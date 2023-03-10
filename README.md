@@ -1,5 +1,7 @@
 # MMM-WebView: A WebView module for MagicMirror²
 
+All credits to Iketaki for this module, just did some additions to make it even greater. 
+
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
 MMM-WebView allows you to add a webview which can display any url.
@@ -64,7 +66,13 @@ git pull
 | `height`              | [Optional] the Height of the WebView (the value of CSS property `height`)<br>Default: `480px`                              |
 | `autoRefresh`         | [Optional] Set to true to allow an auto-refresh of the WebView<br>Default: `false`                                         |
 | `autoRefreshInterval` | [Optional] the interval of auto-refresh for the WebView, in milliseconds If autoRefresh: true<br>Default: `10 * 60 * 1000` |
+| `useRefreshMinute`    | [Optional] Set to false to use autoRefreshInterval instead of refreshMinute, it activates use of refreshMinute and overrides autoRefreshInterval       |
+| `refreshMinute`       | [Optional] Refresh every hour on the set minute. 00-59                                                                     |
+| `invert`              | [Optional] Set to true to activate invert color or white                                                                   |
+| `invertColors`        | [Optional] Set to true to invert colors, false to invert only white (Works only if 'invert' is set to true)                |
+| `filterPercent        | [Optional] intencity of invert                                                                                             |
 | `loadedJS`            | [Optional] the JavaScript code string to be executed after page load<br>Default: `undefined`                               |
+
 
 ## Motivation
 
